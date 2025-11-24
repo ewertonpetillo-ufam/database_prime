@@ -270,6 +270,7 @@ CREATE TABLE patients (
     is_current_smoker BOOLEAN DEFAULT FALSE,
     smoking_duration_years INTEGER,
     years_since_quit_smoking INTEGER,
+    smoked_before BOOLEAN DEFAULT FALSE,
 
     -- Metadata
     active BOOLEAN DEFAULT TRUE,
