@@ -783,54 +783,40 @@ CREATE TABLE epworth_scores (
 
 CREATE INDEX idx_epworth_questionnaire ON epworth_scores(questionnaire_id);
 
--- Parkinson's Disease Sleep Scale (PDSS-1)
-CREATE TABLE pdss1_scores (
+-- Parkinson's Disease Sleep Scale (PDSS-2)
+CREATE TABLE pdss2_scores (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     questionnaire_id UUID UNIQUE NOT NULL REFERENCES questionnaires(id) ON DELETE CASCADE,
 
-    -- 15 questions rated 0-10 (visual analog scale)
-    q1_sleep_quality SMALLINT CHECK (q1_sleep_quality >= 0 AND q1_sleep_quality <= 10),
-    q2_difficulty_falling_asleep SMALLINT CHECK (q2_difficulty_falling_asleep >= 0 AND q2_difficulty_falling_asleep <= 10),
-    q3_difficulty_staying_asleep SMALLINT CHECK (q3_difficulty_staying_asleep >= 0 AND q3_difficulty_staying_asleep <= 10),
-    q4_restlessness SMALLINT CHECK (q4_restlessness >= 0 AND q4_restlessness <= 10),
-    q5_distressing_dreams SMALLINT CHECK (q5_distressing_dreams >= 0 AND q5_distressing_dreams <= 10),
-    q6_distressing_hallucinations SMALLINT CHECK (q6_distressing_hallucinations >= 0 AND q6_distressing_hallucinations <= 10),
-    q7_nocturia SMALLINT CHECK (q7_nocturia >= 0 AND q7_nocturia <= 10),
-    q8_difficulty_turning SMALLINT CHECK (q8_difficulty_turning >= 0 AND q8_difficulty_turning <= 10),
-    q9_painful_posturing SMALLINT CHECK (q9_painful_posturing >= 0 AND q9_painful_posturing <= 10),
-    q10_tremor_waking SMALLINT CHECK (q10_tremor_waking >= 0 AND q10_tremor_waking <= 10),
-    q11_tired_waking SMALLINT CHECK (q11_tired_waking >= 0 AND q11_tired_waking <= 10),
-    q12_refreshed_waking SMALLINT CHECK (q12_refreshed_waking >= 0 AND q12_refreshed_waking <= 10),
-    q13_daytime_dozing SMALLINT CHECK (q13_daytime_dozing >= 0 AND q13_daytime_dozing <= 10),
-    q14_unexpected_dozing SMALLINT CHECK (q14_unexpected_dozing >= 0 AND q14_unexpected_dozing <= 10),
-    q15_total_sleep_hours SMALLINT CHECK (q15_total_sleep_hours >= 0 AND q15_total_sleep_hours <= 10),
+    -- 15 questions rated 0-4
+    q1 SMALLINT CHECK (q1 BETWEEN 0 AND 4),
+    q2 SMALLINT CHECK (q2 BETWEEN 0 AND 4),
+    q3 SMALLINT CHECK (q3 BETWEEN 0 AND 4),
+    q4 SMALLINT CHECK (q4 BETWEEN 0 AND 4),
+    q5 SMALLINT CHECK (q5 BETWEEN 0 AND 4),
+    q6 SMALLINT CHECK (q6 BETWEEN 0 AND 4),
+    q7 SMALLINT CHECK (q7 BETWEEN 0 AND 4),
+    q8 SMALLINT CHECK (q8 BETWEEN 0 AND 4),
+    q9 SMALLINT CHECK (q9 BETWEEN 0 AND 4),
+    q10 SMALLINT CHECK (q10 BETWEEN 0 AND 4),
+    q11 SMALLINT CHECK (q11 BETWEEN 0 AND 4),
+    q12 SMALLINT CHECK (q12 BETWEEN 0 AND 4),
+    q13 SMALLINT CHECK (q13 BETWEEN 0 AND 4),
+    q14 SMALLINT CHECK (q14 BETWEEN 0 AND 4),
+    q15 SMALLINT CHECK (q15 BETWEEN 0 AND 4),
 
     total_score INTEGER GENERATED ALWAYS AS (
-        COALESCE(q1_sleep_quality, 0) + COALESCE(q2_difficulty_falling_asleep, 0) +
-        COALESCE(q3_difficulty_staying_asleep, 0) + COALESCE(q4_restlessness, 0) +
-        COALESCE(q5_distressing_dreams, 0) + COALESCE(q6_distressing_hallucinations, 0) +
-        COALESCE(q7_nocturia, 0) + COALESCE(q8_difficulty_turning, 0) +
-        COALESCE(q9_painful_posturing, 0) + COALESCE(q10_tremor_waking, 0) +
-        COALESCE(q11_tired_waking, 0) + COALESCE(q12_refreshed_waking, 0) +
-        COALESCE(q13_daytime_dozing, 0) + COALESCE(q14_unexpected_dozing, 0) +
-        COALESCE(q15_total_sleep_hours, 0)
-    ) STORED,
-
-    average_score DECIMAL(4,2) GENERATED ALWAYS AS (
-        (COALESCE(q1_sleep_quality, 0) + COALESCE(q2_difficulty_falling_asleep, 0) +
-         COALESCE(q3_difficulty_staying_asleep, 0) + COALESCE(q4_restlessness, 0) +
-         COALESCE(q5_distressing_dreams, 0) + COALESCE(q6_distressing_hallucinations, 0) +
-         COALESCE(q7_nocturia, 0) + COALESCE(q8_difficulty_turning, 0) +
-         COALESCE(q9_painful_posturing, 0) + COALESCE(q10_tremor_waking, 0) +
-         COALESCE(q11_tired_waking, 0) + COALESCE(q12_refreshed_waking, 0) +
-         COALESCE(q13_daytime_dozing, 0) + COALESCE(q14_unexpected_dozing, 0) +
-         COALESCE(q15_total_sleep_hours, 0))::DECIMAL / 15.0
+        COALESCE(q1, 0) + COALESCE(q2, 0) + COALESCE(q3, 0) +
+        COALESCE(q4, 0) + COALESCE(q5, 0) + COALESCE(q6, 0) +
+        COALESCE(q7, 0) + COALESCE(q8, 0) + COALESCE(q9, 0) +
+        COALESCE(q10, 0) + COALESCE(q11, 0) + COALESCE(q12, 0) +
+        COALESCE(q13, 0) + COALESCE(q14, 0) + COALESCE(q15, 0)
     ) STORED,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_pdss1_questionnaire ON pdss1_scores(questionnaire_id);
+CREATE INDEX idx_pdss2_questionnaire ON pdss2_scores(questionnaire_id);
 
 -- REM Sleep Behavior Disorder Screening Questionnaire (RBDSQ)
 CREATE TABLE rbdsq_scores (
@@ -1143,7 +1129,7 @@ SELECT
     rb.total_score AS rbdsq_score,
     sb.total_score AS stopbang_score,
     ep.total_score AS epworth_score,
-    pd.total_score AS pdss1_score,
+    pd.total_score AS pdss2_score,
 
     -- LED
     (SELECT SUM(led_value) FROM patient_medications pm WHERE pm.questionnaire_id = q.id) AS total_ledd,
@@ -1164,7 +1150,7 @@ LEFT JOIN fogq_scores fg ON q.id = fg.questionnaire_id
 LEFT JOIN rbdsq_scores rb ON q.id = rb.questionnaire_id
 LEFT JOIN stopbang_scores sb ON q.id = sb.questionnaire_id
 LEFT JOIN epworth_scores ep ON q.id = ep.questionnaire_id
-LEFT JOIN pdss1_scores pd ON q.id = pd.questionnaire_id;
+LEFT JOIN pdss2_scores pd ON q.id = pd.questionnaire_id;
 
 -- Binary collections summary
 CREATE VIEW v_binary_collections_summary AS
