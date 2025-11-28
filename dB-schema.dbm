@@ -1,0 +1,3550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.0.0-beta1" use-changelog="false" last-position="0,135" last-zoom="0.15" max-obj-count="75"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="pg_database_owner"
+ inherit="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<role name="prime_admin"
+ superuser="true"
+ createdb="true"
+ replication="true"
+ createrole="true"
+ inherit="true"
+ login="true"
+ bypassrls="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<database name="prime_db" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
+	<role name="prime_admin"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<extension name="uuid-ossp" cur-version="1.1">
+	<schema name="public"/>
+	<comment> <![CDATA[generate universally unique identifiers (UUIDs)]]> </comment>
+</extension>
+
+<extension name="pgcrypto" cur-version="1.3">
+	<schema name="public"/>
+	<comment> <![CDATA[cryptographic functions]]> </comment>
+</extension>
+
+<sequence name="gender_types_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="gender_types" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="60" y="40"/>
+	<column name="id" not-null="true" sequence="public.gender_types_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="gender_types_pkey" type="pk-constr" table="public.gender_types">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="gender_types_code_key" type="uq-constr" table="public.gender_types">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="ethnicity_types_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="ethnicity_types" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="460" y="40"/>
+	<column name="id" not-null="true" sequence="public.ethnicity_types_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="ethnicity_types_pkey" type="pk-constr" table="public.ethnicity_types">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="ethnicity_types_code_key" type="uq-constr" table="public.ethnicity_types">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="education_levels_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="education_levels" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="860" y="40"/>
+	<column name="id" not-null="true" sequence="public.education_levels_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="years_equivalent">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="education_levels_pkey" type="pk-constr" table="public.education_levels">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="education_levels_code_key" type="uq-constr" table="public.education_levels">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="marital_status_types_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="marital_status_types" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1320" y="40"/>
+	<column name="id" not-null="true" sequence="public.marital_status_types_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="marital_status_types_pkey" type="pk-constr" table="public.marital_status_types">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="marital_status_types_code_key" type="uq-constr" table="public.marital_status_types">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="income_ranges_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="income_ranges" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1940" y="0"/>
+	<column name="id" not-null="true" sequence="public.income_ranges_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="min_salary">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="max_salary">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="income_ranges_pkey" type="pk-constr" table="public.income_ranges">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="income_ranges_code_key" type="uq-constr" table="public.income_ranges">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="parkinson_phenotypes_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="parkinson_phenotypes" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="440" y="880"/>
+	<column name="id" not-null="true" sequence="public.parkinson_phenotypes_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="parkinson_phenotypes_pkey" type="pk-constr" table="public.parkinson_phenotypes">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="parkinson_phenotypes_code_key" type="uq-constr" table="public.parkinson_phenotypes">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="hoehn_yahr_scale_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="hoehn_yahr_scale" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="360" y="1220"/>
+	<column name="id" not-null="true" sequence="public.hoehn_yahr_scale_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="stage" not-null="true">
+		<type name="numeric" length="2" precision="1"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="hoehn_yahr_scale_pkey" type="pk-constr" table="public.hoehn_yahr_scale">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="hoehn_yahr_scale_stage_key" type="uq-constr" table="public.hoehn_yahr_scale">
+		<columns names="stage" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="dyskinesia_types_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="dyskinesia_types" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="0" y="1220"/>
+	<column name="id" not-null="true" sequence="public.dyskinesia_types_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<constraint name="dyskinesia_types_pkey" type="pk-constr" table="public.dyskinesia_types">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="dyskinesia_types_code_key" type="uq-constr" table="public.dyskinesia_types">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="medications_reference_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="medications_reference" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1340" y="1300"/>
+	<column name="id" not-null="true" sequence="public.medications_reference_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="drug_name" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="generic_name">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="led_conversion_factor" not-null="true" default-value="1.0">
+		<type name="numeric" length="6" precision="3"/>
+	</column>
+	<column name="medication_class">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="notes">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="medications_reference_pkey" type="pk-constr" table="public.medications_reference">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="medications_reference_drug_name_key" type="uq-constr" table="public.medications_reference">
+		<columns names="drug_name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="surgery_types_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="surgery_types" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="2220" y="320"/>
+	<column name="id" not-null="true" sequence="public.surgery_types_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="surgery_types_pkey" type="pk-constr" table="public.surgery_types">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="surgery_types_code_key" type="uq-constr" table="public.surgery_types">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="collection_form_types_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="collection_form_types" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="0" y="880"/>
+	<column name="id" not-null="true" sequence="public.collection_form_types_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<constraint name="collection_form_types_pkey" type="pk-constr" table="public.collection_form_types">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="collection_form_types_code_key" type="uq-constr" table="public.collection_form_types">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="evaluators" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="20" y="400"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="full_name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="registration_number">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="specialty">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="phone">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="evaluators_pkey" type="pk-constr" table="public.evaluators">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="evaluators_registration_number_key" type="uq-constr" table="public.evaluators">
+		<columns names="registration_number" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="evaluators_email_key" type="uq-constr" table="public.evaluators">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_evaluators_active" table="public.evaluators"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="active"/>
+		</idxelement>
+</index>
+
+<index name="idx_evaluators_email" table="public.evaluators"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="email"/>
+		</idxelement>
+</index>
+
+<table name="patients" layers="0" collapse-mode="2" max-obj-count="25" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<comment> <![CDATA[Anonymized patient records with HMAC-hashed CPF for privacy]]> </comment>
+	<position x="1560" y="320"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="cpf_hash" not-null="true">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="full_name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="date_of_birth" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="gender_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="ethnicity_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nationality" default-value="'Brasileiro'">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="phone_primary">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="phone_secondary">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="education_level_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="education_other">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="marital_status_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="occupation">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="income_range_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="is_current_smoker" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="smoking_duration_years">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="years_since_quit_smoking">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="chk_age" type="ck-constr" table="public.patients">
+			<expression> <![CDATA[(date_of_birth <= CURRENT_DATE)]]> </expression>
+	</constraint>
+	<constraint name="chk_smoking_quit" type="ck-constr" table="public.patients">
+			<expression> <![CDATA[(((is_current_smoker = false) AND (years_since_quit_smoking >= 0)) OR ((is_current_smoker = true) AND (years_since_quit_smoking IS NULL)))]]> </expression>
+	</constraint>
+	<constraint name="patients_pkey" type="pk-constr" table="public.patients">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="patients_cpf_hash_key" type="uq-constr" table="public.patients">
+		<columns names="cpf_hash" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_patients_cpf_hash" table="public.patients"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="cpf_hash"/>
+		</idxelement>
+</index>
+
+<index name="idx_patients_active" table="public.patients"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="active"/>
+		</idxelement>
+</index>
+
+<index name="idx_patients_dob" table="public.patients"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="date_of_birth"/>
+		</idxelement>
+</index>
+
+<table name="questionnaires" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<comment> <![CDATA[Clinical assessment sessions linking patients, evaluators, and all collected data]]> </comment>
+	<position x="960" y="660"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="patient_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="evaluator_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="collection_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="assessment_version" default-value="'1.0'">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="status" default-value="'draft'">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="completed_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="questionnaires_status_check" type="ck-constr" table="public.questionnaires">
+			<expression> <![CDATA[((status)::text = ANY ((ARRAY['draft'::character varying, 'in_progress'::character varying, 'completed'::character varying, 'archived'::character varying])::text[]))]]> </expression>
+	</constraint>
+	<constraint name="chk_collection_date" type="ck-constr" table="public.questionnaires">
+			<expression> <![CDATA[(collection_date <= CURRENT_DATE)]]> </expression>
+	</constraint>
+	<constraint name="questionnaires_pkey" type="pk-constr" table="public.questionnaires">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_questionnaires_patient" table="public.questionnaires"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="patient_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_questionnaires_evaluator" table="public.questionnaires"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="evaluator_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_questionnaires_status" table="public.questionnaires"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="status"/>
+		</idxelement>
+</index>
+
+<index name="idx_questionnaires_date" table="public.questionnaires"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="collection_date"/>
+		</idxelement>
+</index>
+
+<table name="anthropometric_data" layers="0" collapse-mode="2" max-obj-count="12" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="2160" y="680"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="weight_kg" not-null="true">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="height_cm" not-null="true">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="bmi" default-value="weight_kg / power((height_cm / (100)::numeric), (2)::numeric)" generated="true">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="waist_circumference_cm">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="hip_circumference_cm">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="abdominal_circumference_cm">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="waist_hip_ratio" default-value="CASE     WHEN (hip_circumference_cm &gt; (0)::numeric) THEN (waist_circumference_cm / hip_circumference_cm)     ELSE NULL::numeric END" generated="true">
+		<type name="numeric" length="4" precision="3"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="anthropometric_data_weight_kg_check" type="ck-constr" table="public.anthropometric_data">
+			<expression> <![CDATA[((weight_kg > (0)::numeric) AND (weight_kg < (500)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="anthropometric_data_height_cm_check" type="ck-constr" table="public.anthropometric_data">
+			<expression> <![CDATA[((height_cm > (0)::numeric) AND (height_cm < (300)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="anthropometric_data_waist_circumference_cm_check" type="ck-constr" table="public.anthropometric_data">
+			<expression> <![CDATA[(waist_circumference_cm > (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="anthropometric_data_hip_circumference_cm_check" type="ck-constr" table="public.anthropometric_data">
+			<expression> <![CDATA[(hip_circumference_cm > (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="anthropometric_data_abdominal_circumference_cm_check" type="ck-constr" table="public.anthropometric_data">
+			<expression> <![CDATA[(abdominal_circumference_cm > (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="anthropometric_data_pkey" type="pk-constr" table="public.anthropometric_data">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="anthropometric_data_questionnaire_id_key" type="uq-constr" table="public.anthropometric_data">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_anthropometric_questionnaire" table="public.anthropometric_data"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="clinical_assessments" layers="0" collapse-mode="2" max-obj-count="36" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="60" y="1640"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="diagnostic_description" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="age_at_onset">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="initial_symptom">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="affected_side">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="phenotype_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="hoehn_yahr_stage_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="schwab_england_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="has_family_history" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="family_kinship_degree">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="has_dyskinesia" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="dyskinesia_interfered" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="dyskinesia_type_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="has_freezing_of_gait" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="has_wearing_off" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="average_on_time_hours">
+		<type name="numeric" length="4" precision="2"/>
+	</column>
+	<column name="has_delayed_on" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="ldopa_onset_time_hours">
+		<type name="numeric" length="4" precision="2"/>
+	</column>
+	<column name="assessed_on_levodopa" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="has_surgery_history" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="surgery_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="surgery_type_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="surgery_target">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="comorbidities">
+		<type name="text" length="0"/>
+	</column>
+	<column name="other_medications">
+		<type name="text" length="0"/>
+	</column>
+	<column name="disease_evolution">
+		<type name="text" length="0"/>
+	</column>
+	<column name="current_symptoms">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="clinical_assessments_age_at_onset_check" type="ck-constr" table="public.clinical_assessments">
+			<expression> <![CDATA[((age_at_onset > 0) AND (age_at_onset < 150))]]> </expression>
+	</constraint>
+	<constraint name="clinical_assessments_affected_side_check" type="ck-constr" table="public.clinical_assessments">
+			<expression> <![CDATA[((affected_side)::text = ANY ((ARRAY['Direito'::character varying, 'Esquerdo'::character varying, 'Bilateral'::character varying, 'Não especificado'::character varying])::text[]))]]> </expression>
+	</constraint>
+	<constraint name="clinical_assessments_schwab_england_score_check" type="ck-constr" table="public.clinical_assessments">
+			<expression> <![CDATA[((schwab_england_score >= 0) AND (schwab_england_score <= 100))]]> </expression>
+	</constraint>
+	<constraint name="clinical_assessments_surgery_year_check" type="ck-constr" table="public.clinical_assessments">
+			<expression> <![CDATA[((surgery_year >= 1950) AND ((surgery_year)::numeric <= EXTRACT(year FROM CURRENT_DATE)))]]> </expression>
+	</constraint>
+	<constraint name="clinical_assessments_pkey" type="pk-constr" table="public.clinical_assessments">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="clinical_assessments_questionnaire_id_key" type="uq-constr" table="public.clinical_assessments">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_clinical_questionnaire" table="public.clinical_assessments"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_clinical_onset_age" table="public.clinical_assessments"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="age_at_onset"/>
+		</idxelement>
+</index>
+
+<table name="patient_medications" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="620" y="1640"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="medication_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dose_mg" not-null="true">
+		<type name="numeric" length="8" precision="2"/>
+	</column>
+	<column name="doses_per_day" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="led_conversion_factor" not-null="true">
+		<type name="numeric" length="6" precision="3"/>
+	</column>
+	<column name="led_value" default-value="dose_mg * led_conversion_factor" generated="true">
+		<type name="numeric" length="10" precision="2"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="patient_medications_dose_mg_check" type="ck-constr" table="public.patient_medications">
+			<expression> <![CDATA[(dose_mg > (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="patient_medications_doses_per_day_check" type="ck-constr" table="public.patient_medications">
+			<expression> <![CDATA[((doses_per_day > 0) AND (doses_per_day <= 24))]]> </expression>
+	</constraint>
+	<constraint name="patient_medications_pkey" type="pk-constr" table="public.patient_medications">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="patient_medications_questionnaire_id_medication_id_key" type="uq-constr" table="public.patient_medications">
+		<columns names="questionnaire_id,medication_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_patient_meds_questionnaire" table="public.patient_medications"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_patient_meds_medication" table="public.patient_medications"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="medication_id"/>
+		</idxelement>
+</index>
+
+<table name="updrs_part3_scores" layers="0" collapse-mode="2" max-obj-count="46" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1220" y="1640"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="speech">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="facial_expression">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rising_from_chair">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="gait">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="freezing_of_gait">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="postural_stability">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="posture">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="global_bradykinesia">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="postural_tremor_amplitude">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rigidity_neck">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rigidity_rue">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rigidity_lue">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rigidity_rle">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rigidity_lle">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="finger_tapping_right">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="finger_tapping_left">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="hand_movements_right">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="hand_movements_left">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="pronation_supination_right">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="pronation_supination_left">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="toe_tapping_right">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="toe_tapping_left">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="leg_agility_right">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="leg_agility_left">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="postural_tremor_right">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="postural_tremor_left">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="kinetic_tremor_right">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="kinetic_tremor_left">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rest_tremor_rue">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rest_tremor_lue">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rest_tremor_rle">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rest_tremor_lle">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="rest_tremor_lip_jaw">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="dyskinesia_present" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="dyskinesia_interfered" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="total_score" default-value="(((((((((((((((((((((((((((((((COALESCE((speech)::integer, 0) + COALESCE((facial_expression)::integer, 0)) + COALESCE((rigidity_neck)::integer, 0)) + COALESCE((rigidity_rue)::integer, 0)) + COALESCE((rigidity_lue)::integer, 0)) + COALESCE((rigidity_rle)::integer, 0)) + COALESCE((rigidity_lle)::integer, 0)) + COALESCE((finger_tapping_right)::integer, 0)) + COALESCE((finger_tapping_left)::integer, 0)) + COALESCE((hand_movements_right)::integer, 0)) + COALESCE((hand_movements_left)::integer, 0)) + COALESCE((pronation_supination_right)::integer, 0)) + COALESCE((pronation_supination_left)::integer, 0)) + COALESCE((toe_tapping_right)::integer, 0)) + COALESCE((toe_tapping_left)::integer, 0)) + COALESCE((leg_agility_right)::integer, 0)) + COALESCE((leg_agility_left)::integer, 0)) + COALESCE((rising_from_chair)::integer, 0)) + COALESCE((gait)::integer, 0)) + COALESCE((freezing_of_gait)::integer, 0)) + COALESCE((postural_stability)::integer, 0)) + COALESCE((posture)::integer, 0)) + COALESCE((global_bradykinesia)::integer, 0)) + COALESCE((postural_tremor_right)::integer, 0)) + COALESCE((postural_tremor_left)::integer, 0)) + COALESCE((kinetic_tremor_right)::integer, 0)) + COALESCE((kinetic_tremor_left)::integer, 0)) + COALESCE((rest_tremor_rue)::integer, 0)) + COALESCE((rest_tremor_lue)::integer, 0)) + COALESCE((rest_tremor_rle)::integer, 0)) + COALESCE((rest_tremor_lle)::integer, 0)) + COALESCE((rest_tremor_lip_jaw)::integer, 0)) + COALESCE((postural_tremor_amplitude)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="updrs_part3_scores_speech_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((speech >= 0) AND (speech <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_facial_expression_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((facial_expression >= 0) AND (facial_expression <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rising_from_chair_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rising_from_chair >= 0) AND (rising_from_chair <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_gait_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((gait >= 0) AND (gait <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_freezing_of_gait_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((freezing_of_gait >= 0) AND (freezing_of_gait <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_postural_stability_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((postural_stability >= 0) AND (postural_stability <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_posture_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((posture >= 0) AND (posture <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_global_bradykinesia_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((global_bradykinesia >= 0) AND (global_bradykinesia <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_postural_tremor_amplitude_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((postural_tremor_amplitude >= 0) AND (postural_tremor_amplitude <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rigidity_neck_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rigidity_neck >= 0) AND (rigidity_neck <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rigidity_rue_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rigidity_rue >= 0) AND (rigidity_rue <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rigidity_lue_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rigidity_lue >= 0) AND (rigidity_lue <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rigidity_rle_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rigidity_rle >= 0) AND (rigidity_rle <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rigidity_lle_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rigidity_lle >= 0) AND (rigidity_lle <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_finger_tapping_right_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((finger_tapping_right >= 0) AND (finger_tapping_right <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_finger_tapping_left_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((finger_tapping_left >= 0) AND (finger_tapping_left <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_hand_movements_right_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((hand_movements_right >= 0) AND (hand_movements_right <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_hand_movements_left_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((hand_movements_left >= 0) AND (hand_movements_left <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_pronation_supination_right_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((pronation_supination_right >= 0) AND (pronation_supination_right <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_pronation_supination_left_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((pronation_supination_left >= 0) AND (pronation_supination_left <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_toe_tapping_right_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((toe_tapping_right >= 0) AND (toe_tapping_right <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_toe_tapping_left_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((toe_tapping_left >= 0) AND (toe_tapping_left <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_leg_agility_right_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((leg_agility_right >= 0) AND (leg_agility_right <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_leg_agility_left_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((leg_agility_left >= 0) AND (leg_agility_left <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_postural_tremor_right_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((postural_tremor_right >= 0) AND (postural_tremor_right <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_postural_tremor_left_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((postural_tremor_left >= 0) AND (postural_tremor_left <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_kinetic_tremor_right_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((kinetic_tremor_right >= 0) AND (kinetic_tremor_right <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_kinetic_tremor_left_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((kinetic_tremor_left >= 0) AND (kinetic_tremor_left <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rest_tremor_rue_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rest_tremor_rue >= 0) AND (rest_tremor_rue <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rest_tremor_lue_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rest_tremor_lue >= 0) AND (rest_tremor_lue <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rest_tremor_rle_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rest_tremor_rle >= 0) AND (rest_tremor_rle <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rest_tremor_lle_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rest_tremor_lle >= 0) AND (rest_tremor_lle <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_rest_tremor_lip_jaw_check" type="ck-constr" table="public.updrs_part3_scores">
+			<expression> <![CDATA[((rest_tremor_lip_jaw >= 0) AND (rest_tremor_lip_jaw <= 4))]]> </expression>
+	</constraint>
+	<constraint name="updrs_part3_scores_pkey" type="pk-constr" table="public.updrs_part3_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="updrs_part3_scores_questionnaire_id_key" type="uq-constr" table="public.updrs_part3_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_updrs3_questionnaire" table="public.updrs_part3_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="meem_scores" layers="0" collapse-mode="2" max-obj-count="40" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1820" y="1640"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="orientation_day">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_date">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_month">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_year">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_time">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_location">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_institution">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_city">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_state">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="orientation_country">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="registration_word1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="registration_word2">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="registration_word3">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="attention_calc1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="attention_calc2">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="attention_calc3">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="attention_calc4">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="attention_calc5">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="recall_word1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="recall_word2">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="recall_word3">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_naming1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_naming2">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_repetition">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_command1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_command2">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_command3">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_reading">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_writing">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="language_copying">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="total_score" default-value="((((((((((((((((((((((((((((COALESCE((orientation_day)::integer, 0) + COALESCE((orientation_date)::integer, 0)) + COALESCE((orientation_month)::integer, 0)) + COALESCE((orientation_year)::integer, 0)) + COALESCE((orientation_time)::integer, 0)) + COALESCE((orientation_location)::integer, 0)) + COALESCE((orientation_institution)::integer, 0)) + COALESCE((orientation_city)::integer, 0)) + COALESCE((orientation_state)::integer, 0)) + COALESCE((orientation_country)::integer, 0)) + COALESCE((registration_word1)::integer, 0)) + COALESCE((registration_word2)::integer, 0)) + COALESCE((registration_word3)::integer, 0)) + COALESCE((attention_calc1)::integer, 0)) + COALESCE((attention_calc2)::integer, 0)) + COALESCE((attention_calc3)::integer, 0)) + COALESCE((attention_calc4)::integer, 0)) + COALESCE((attention_calc5)::integer, 0)) + COALESCE((recall_word1)::integer, 0)) + COALESCE((recall_word2)::integer, 0)) + COALESCE((recall_word3)::integer, 0)) + COALESCE((language_naming1)::integer, 0)) + COALESCE((language_naming2)::integer, 0)) + COALESCE((language_repetition)::integer, 0)) + COALESCE((language_command1)::integer, 0)) + COALESCE((language_command2)::integer, 0)) + COALESCE((language_command3)::integer, 0)) + COALESCE((language_reading)::integer, 0)) + COALESCE((language_writing)::integer, 0)) + COALESCE((language_copying)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="meem_scores_orientation_day_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_day = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_date_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_date = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_month_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_month = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_year_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_year = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_time_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_time = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_location_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_location = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_institution_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_institution = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_city_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_city = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_state_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_state = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_orientation_country_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(orientation_country = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_registration_word1_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(registration_word1 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_registration_word2_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(registration_word2 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_registration_word3_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(registration_word3 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_attention_calc1_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(attention_calc1 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_attention_calc2_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(attention_calc2 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_attention_calc3_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(attention_calc3 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_attention_calc4_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(attention_calc4 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_attention_calc5_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(attention_calc5 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_recall_word1_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(recall_word1 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_recall_word2_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(recall_word2 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_recall_word3_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(recall_word3 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_naming1_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_naming1 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_naming2_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_naming2 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_repetition_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_repetition = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_command1_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_command1 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_command2_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_command2 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_command3_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_command3 = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_reading_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_reading = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_writing_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_writing = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_language_copying_check" type="ck-constr" table="public.meem_scores">
+			<expression> <![CDATA[(language_copying = ANY (ARRAY[0, 1]))]]> </expression>
+	</constraint>
+	<constraint name="meem_scores_pkey" type="pk-constr" table="public.meem_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="meem_scores_questionnaire_id_key" type="uq-constr" table="public.meem_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_meem_questionnaire" table="public.meem_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="udysrs_scores" layers="0" collapse-mode="2" max-obj-count="38" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="2340" y="1640"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="on_dyskinesia_time">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_speech">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_chewing">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_eating">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_dressing">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_hygiene">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_writing">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_hobbies">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_walking">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_social">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_emotional">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="off_dystonia_time">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="dystonia_activities">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="dystonia_pain_impact">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="dystonia_pain_severity">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="severity_face">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="severity_neck">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="severity_right_arm">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="severity_left_arm">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="severity_trunk">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="severity_right_leg">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="severity_left_leg">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="disability_communication">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="disability_drinking">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="disability_dressing">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="disability_walking">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="historical_subscore" default-value="(((((((((((((COALESCE((on_dyskinesia_time)::integer, 0) + COALESCE((impact_speech)::integer, 0)) + COALESCE((impact_chewing)::integer, 0)) + COALESCE((impact_eating)::integer, 0)) + COALESCE((impact_dressing)::integer, 0)) + COALESCE((impact_hygiene)::integer, 0)) + COALESCE((impact_writing)::integer, 0)) + COALESCE((impact_hobbies)::integer, 0)) + COALESCE((impact_walking)::integer, 0)) + COALESCE((impact_social)::integer, 0)) + COALESCE((impact_emotional)::integer, 0)) + COALESCE((off_dystonia_time)::integer, 0)) + COALESCE((dystonia_activities)::integer, 0)) + COALESCE((dystonia_pain_impact)::integer, 0)) + COALESCE((dystonia_pain_severity)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="objective_subscore" default-value="(((((((((COALESCE((severity_face)::integer, 0) + COALESCE((severity_neck)::integer, 0)) + COALESCE((severity_right_arm)::integer, 0)) + COALESCE((severity_left_arm)::integer, 0)) + COALESCE((severity_trunk)::integer, 0)) + COALESCE((severity_right_leg)::integer, 0)) + COALESCE((severity_left_leg)::integer, 0)) + COALESCE((disability_communication)::integer, 0)) + COALESCE((disability_drinking)::integer, 0)) + COALESCE((disability_dressing)::integer, 0)) + COALESCE((disability_walking)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="total_score" default-value="((((((((((((((((((((((((COALESCE((on_dyskinesia_time)::integer, 0) + COALESCE((impact_speech)::integer, 0)) + COALESCE((impact_chewing)::integer, 0)) + COALESCE((impact_eating)::integer, 0)) + COALESCE((impact_dressing)::integer, 0)) + COALESCE((impact_hygiene)::integer, 0)) + COALESCE((impact_writing)::integer, 0)) + COALESCE((impact_hobbies)::integer, 0)) + COALESCE((impact_walking)::integer, 0)) + COALESCE((impact_social)::integer, 0)) + COALESCE((impact_emotional)::integer, 0)) + COALESCE((off_dystonia_time)::integer, 0)) + COALESCE((dystonia_activities)::integer, 0)) + COALESCE((dystonia_pain_impact)::integer, 0)) + COALESCE((dystonia_pain_severity)::integer, 0)) + COALESCE((severity_face)::integer, 0)) + COALESCE((severity_neck)::integer, 0)) + COALESCE((severity_right_arm)::integer, 0)) + COALESCE((severity_left_arm)::integer, 0)) + COALESCE((severity_trunk)::integer, 0)) + COALESCE((severity_right_leg)::integer, 0)) + COALESCE((severity_left_leg)::integer, 0)) + COALESCE((disability_communication)::integer, 0)) + COALESCE((disability_drinking)::integer, 0)) + COALESCE((disability_dressing)::integer, 0)) + COALESCE((disability_walking)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="udysrs_scores_on_dyskinesia_time_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((on_dyskinesia_time >= 0) AND (on_dyskinesia_time <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_speech_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_speech >= 0) AND (impact_speech <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_chewing_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_chewing >= 0) AND (impact_chewing <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_eating_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_eating >= 0) AND (impact_eating <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_dressing_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_dressing >= 0) AND (impact_dressing <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_hygiene_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_hygiene >= 0) AND (impact_hygiene <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_writing_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_writing >= 0) AND (impact_writing <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_hobbies_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_hobbies >= 0) AND (impact_hobbies <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_walking_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_walking >= 0) AND (impact_walking <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_social_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_social >= 0) AND (impact_social <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_impact_emotional_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((impact_emotional >= 0) AND (impact_emotional <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_off_dystonia_time_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((off_dystonia_time >= 0) AND (off_dystonia_time <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_dystonia_activities_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((dystonia_activities >= 0) AND (dystonia_activities <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_dystonia_pain_impact_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((dystonia_pain_impact >= 0) AND (dystonia_pain_impact <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_dystonia_pain_severity_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((dystonia_pain_severity >= 0) AND (dystonia_pain_severity <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_severity_face_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((severity_face >= 0) AND (severity_face <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_severity_neck_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((severity_neck >= 0) AND (severity_neck <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_severity_right_arm_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((severity_right_arm >= 0) AND (severity_right_arm <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_severity_left_arm_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((severity_left_arm >= 0) AND (severity_left_arm <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_severity_trunk_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((severity_trunk >= 0) AND (severity_trunk <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_severity_right_leg_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((severity_right_leg >= 0) AND (severity_right_leg <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_severity_left_leg_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((severity_left_leg >= 0) AND (severity_left_leg <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_disability_communication_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((disability_communication >= 0) AND (disability_communication <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_disability_drinking_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((disability_drinking >= 0) AND (disability_drinking <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_disability_dressing_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((disability_dressing >= 0) AND (disability_dressing <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_disability_walking_check" type="ck-constr" table="public.udysrs_scores">
+			<expression> <![CDATA[((disability_walking >= 0) AND (disability_walking <= 4))]]> </expression>
+	</constraint>
+	<constraint name="udysrs_scores_pkey" type="pk-constr" table="public.udysrs_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="udysrs_scores_questionnaire_id_key" type="uq-constr" table="public.udysrs_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_udysrs_questionnaire" table="public.udysrs_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="nms_scores" layers="0" collapse-mode="2" max-obj-count="16" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="60" y="3580"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="cardiovascular_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="sleep_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="mood_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="perceptual_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="attention_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="gastrointestinal_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="urinary_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="sexual_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="miscellaneous_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="total_score" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="nms_scores_pkey" type="pk-constr" table="public.nms_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="nms_scores_questionnaire_id_key" type="uq-constr" table="public.nms_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_nms_questionnaire" table="public.nms_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="nmf_scores" layers="0" collapse-mode="2" max-obj-count="15" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="500" y="3580"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="change_depression">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="change_anxiety">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="change_cognition">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="change_urinary">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="change_restlessness">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="change_pain">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="change_fatigue">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="change_sweating">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="time_rating">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="total_score" default-value="(((((((COALESCE((change_depression)::integer, 0) + COALESCE((change_anxiety)::integer, 0)) + COALESCE((change_cognition)::integer, 0)) + COALESCE((change_urinary)::integer, 0)) + COALESCE((change_restlessness)::integer, 0)) + COALESCE((change_pain)::integer, 0)) + COALESCE((change_fatigue)::integer, 0)) + COALESCE((change_sweating)::integer, 0)) * COALESCE((time_rating)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="nmf_scores_change_depression_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((change_depression >= 0) AND (change_depression <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_change_anxiety_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((change_anxiety >= 0) AND (change_anxiety <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_change_cognition_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((change_cognition >= 0) AND (change_cognition <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_change_urinary_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((change_urinary >= 0) AND (change_urinary <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_change_restlessness_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((change_restlessness >= 0) AND (change_restlessness <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_change_pain_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((change_pain >= 0) AND (change_pain <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_change_fatigue_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((change_fatigue >= 0) AND (change_fatigue <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_change_sweating_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((change_sweating >= 0) AND (change_sweating <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_time_rating_check" type="ck-constr" table="public.nmf_scores">
+			<expression> <![CDATA[((time_rating >= 0) AND (time_rating <= 4))]]> </expression>
+	</constraint>
+	<constraint name="nmf_scores_pkey" type="pk-constr" table="public.nmf_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="nmf_scores_questionnaire_id_key" type="uq-constr" table="public.nmf_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_nmf_questionnaire" table="public.nmf_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="fogq_scores" layers="0" collapse-mode="2" max-obj-count="12" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1000" y="3580"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="gait_worst_state">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="impact_daily_activities">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="feet_stuck">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="longest_episode">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="hesitation_initiation">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="hesitation_turning">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="total_score" default-value="((((COALESCE((gait_worst_state)::integer, 0) + COALESCE((impact_daily_activities)::integer, 0)) + COALESCE((feet_stuck)::integer, 0)) + COALESCE((longest_episode)::integer, 0)) + COALESCE((hesitation_initiation)::integer, 0)) + COALESCE((hesitation_turning)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="fogq_scores_gait_worst_state_check" type="ck-constr" table="public.fogq_scores">
+			<expression> <![CDATA[((gait_worst_state >= 0) AND (gait_worst_state <= 4))]]> </expression>
+	</constraint>
+	<constraint name="fogq_scores_impact_daily_activities_check" type="ck-constr" table="public.fogq_scores">
+			<expression> <![CDATA[((impact_daily_activities >= 0) AND (impact_daily_activities <= 4))]]> </expression>
+	</constraint>
+	<constraint name="fogq_scores_feet_stuck_check" type="ck-constr" table="public.fogq_scores">
+			<expression> <![CDATA[((feet_stuck >= 0) AND (feet_stuck <= 4))]]> </expression>
+	</constraint>
+	<constraint name="fogq_scores_longest_episode_check" type="ck-constr" table="public.fogq_scores">
+			<expression> <![CDATA[((longest_episode >= 0) AND (longest_episode <= 4))]]> </expression>
+	</constraint>
+	<constraint name="fogq_scores_hesitation_initiation_check" type="ck-constr" table="public.fogq_scores">
+			<expression> <![CDATA[((hesitation_initiation >= 0) AND (hesitation_initiation <= 4))]]> </expression>
+	</constraint>
+	<constraint name="fogq_scores_hesitation_turning_check" type="ck-constr" table="public.fogq_scores">
+			<expression> <![CDATA[((hesitation_turning >= 0) AND (hesitation_turning <= 4))]]> </expression>
+	</constraint>
+	<constraint name="fogq_scores_pkey" type="pk-constr" table="public.fogq_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="fogq_scores_questionnaire_id_key" type="uq-constr" table="public.fogq_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_fogq_questionnaire" table="public.fogq_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="stopbang_scores" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1500" y="3580"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="snoring" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="tired" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="observed_apnea" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="blood_pressure" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="bmi_over_35" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="age_over_50" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="neck_circumference_large" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="gender_male" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="total_score" default-value="(((((( CASE     WHEN snoring THEN 1     ELSE 0 END + CASE     WHEN tired THEN 1     ELSE 0 END) + CASE     WHEN observed_apnea THEN 1     ELSE 0 END) + CASE     WHEN blood_pressure THEN 1     ELSE 0 END) + CASE     WHEN bmi_over_35 THEN 1     ELSE 0 END) + CASE     WHEN age_over_50 THEN 1     ELSE 0 END) + CASE     WHEN neck_circumference_large THEN 1     ELSE 0 END) + CASE     WHEN gender_male THEN 1     ELSE 0 END" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="stopbang_scores_pkey" type="pk-constr" table="public.stopbang_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="stopbang_scores_questionnaire_id_key" type="uq-constr" table="public.stopbang_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_stopbang_questionnaire" table="public.stopbang_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="epworth_scores" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="2000" y="3580"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="sitting_reading">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="watching_tv">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="sitting_inactive_public">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="passenger_car">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="lying_down_afternoon">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="sitting_talking">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="sitting_after_lunch">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="car_stopped_traffic">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="total_score" default-value="((((((COALESCE((sitting_reading)::integer, 0) + COALESCE((watching_tv)::integer, 0)) + COALESCE((sitting_inactive_public)::integer, 0)) + COALESCE((passenger_car)::integer, 0)) + COALESCE((lying_down_afternoon)::integer, 0)) + COALESCE((sitting_talking)::integer, 0)) + COALESCE((sitting_after_lunch)::integer, 0)) + COALESCE((car_stopped_traffic)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="epworth_scores_sitting_reading_check" type="ck-constr" table="public.epworth_scores">
+			<expression> <![CDATA[((sitting_reading >= 0) AND (sitting_reading <= 3))]]> </expression>
+	</constraint>
+	<constraint name="epworth_scores_watching_tv_check" type="ck-constr" table="public.epworth_scores">
+			<expression> <![CDATA[((watching_tv >= 0) AND (watching_tv <= 3))]]> </expression>
+	</constraint>
+	<constraint name="epworth_scores_sitting_inactive_public_check" type="ck-constr" table="public.epworth_scores">
+			<expression> <![CDATA[((sitting_inactive_public >= 0) AND (sitting_inactive_public <= 3))]]> </expression>
+	</constraint>
+	<constraint name="epworth_scores_passenger_car_check" type="ck-constr" table="public.epworth_scores">
+			<expression> <![CDATA[((passenger_car >= 0) AND (passenger_car <= 3))]]> </expression>
+	</constraint>
+	<constraint name="epworth_scores_lying_down_afternoon_check" type="ck-constr" table="public.epworth_scores">
+			<expression> <![CDATA[((lying_down_afternoon >= 0) AND (lying_down_afternoon <= 3))]]> </expression>
+	</constraint>
+	<constraint name="epworth_scores_sitting_talking_check" type="ck-constr" table="public.epworth_scores">
+			<expression> <![CDATA[((sitting_talking >= 0) AND (sitting_talking <= 3))]]> </expression>
+	</constraint>
+	<constraint name="epworth_scores_sitting_after_lunch_check" type="ck-constr" table="public.epworth_scores">
+			<expression> <![CDATA[((sitting_after_lunch >= 0) AND (sitting_after_lunch <= 3))]]> </expression>
+	</constraint>
+	<constraint name="epworth_scores_car_stopped_traffic_check" type="ck-constr" table="public.epworth_scores">
+			<expression> <![CDATA[((car_stopped_traffic >= 0) AND (car_stopped_traffic <= 3))]]> </expression>
+	</constraint>
+	<constraint name="epworth_scores_pkey" type="pk-constr" table="public.epworth_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="epworth_scores_questionnaire_id_key" type="uq-constr" table="public.epworth_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_epworth_questionnaire" table="public.epworth_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="pdss1_scores" layers="0" collapse-mode="2" max-obj-count="24" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="60" y="4320"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="q1_sleep_quality">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q2_difficulty_falling_asleep">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q3_difficulty_staying_asleep">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q4_restlessness">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q5_distressing_dreams">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q6_distressing_hallucinations">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q7_nocturia">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q8_difficulty_turning">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q9_painful_posturing">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q10_tremor_waking">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q11_tired_waking">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q12_refreshed_waking">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q13_daytime_dozing">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q14_unexpected_dozing">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="q15_total_sleep_hours">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="total_score" default-value="(((((((((((((COALESCE((q1_sleep_quality)::integer, 0) + COALESCE((q2_difficulty_falling_asleep)::integer, 0)) + COALESCE((q3_difficulty_staying_asleep)::integer, 0)) + COALESCE((q4_restlessness)::integer, 0)) + COALESCE((q5_distressing_dreams)::integer, 0)) + COALESCE((q6_distressing_hallucinations)::integer, 0)) + COALESCE((q7_nocturia)::integer, 0)) + COALESCE((q8_difficulty_turning)::integer, 0)) + COALESCE((q9_painful_posturing)::integer, 0)) + COALESCE((q10_tremor_waking)::integer, 0)) + COALESCE((q11_tired_waking)::integer, 0)) + COALESCE((q12_refreshed_waking)::integer, 0)) + COALESCE((q13_daytime_dozing)::integer, 0)) + COALESCE((q14_unexpected_dozing)::integer, 0)) + COALESCE((q15_total_sleep_hours)::integer, 0)" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="average_score" default-value="(((((((((((((((COALESCE((q1_sleep_quality)::integer, 0) + COALESCE((q2_difficulty_falling_asleep)::integer, 0)) + COALESCE((q3_difficulty_staying_asleep)::integer, 0)) + COALESCE((q4_restlessness)::integer, 0)) + COALESCE((q5_distressing_dreams)::integer, 0)) + COALESCE((q6_distressing_hallucinations)::integer, 0)) + COALESCE((q7_nocturia)::integer, 0)) + COALESCE((q8_difficulty_turning)::integer, 0)) + COALESCE((q9_painful_posturing)::integer, 0)) + COALESCE((q10_tremor_waking)::integer, 0)) + COALESCE((q11_tired_waking)::integer, 0)) + COALESCE((q12_refreshed_waking)::integer, 0)) + COALESCE((q13_daytime_dozing)::integer, 0)) + COALESCE((q14_unexpected_dozing)::integer, 0)) + COALESCE((q15_total_sleep_hours)::integer, 0)))::numeric / 15.0" generated="true">
+		<type name="numeric" length="4" precision="2"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="pdss1_scores_q1_sleep_quality_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q1_sleep_quality >= 0) AND (q1_sleep_quality <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q2_difficulty_falling_asleep_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q2_difficulty_falling_asleep >= 0) AND (q2_difficulty_falling_asleep <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q3_difficulty_staying_asleep_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q3_difficulty_staying_asleep >= 0) AND (q3_difficulty_staying_asleep <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q4_restlessness_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q4_restlessness >= 0) AND (q4_restlessness <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q5_distressing_dreams_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q5_distressing_dreams >= 0) AND (q5_distressing_dreams <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q6_distressing_hallucinations_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q6_distressing_hallucinations >= 0) AND (q6_distressing_hallucinations <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q7_nocturia_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q7_nocturia >= 0) AND (q7_nocturia <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q8_difficulty_turning_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q8_difficulty_turning >= 0) AND (q8_difficulty_turning <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q9_painful_posturing_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q9_painful_posturing >= 0) AND (q9_painful_posturing <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q10_tremor_waking_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q10_tremor_waking >= 0) AND (q10_tremor_waking <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q11_tired_waking_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q11_tired_waking >= 0) AND (q11_tired_waking <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q12_refreshed_waking_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q12_refreshed_waking >= 0) AND (q12_refreshed_waking <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q13_daytime_dozing_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q13_daytime_dozing >= 0) AND (q13_daytime_dozing <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q14_unexpected_dozing_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q14_unexpected_dozing >= 0) AND (q14_unexpected_dozing <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_q15_total_sleep_hours_check" type="ck-constr" table="public.pdss1_scores">
+			<expression> <![CDATA[((q15_total_sleep_hours >= 0) AND (q15_total_sleep_hours <= 10))]]> </expression>
+	</constraint>
+	<constraint name="pdss1_scores_pkey" type="pk-constr" table="public.pdss1_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="pdss1_scores_questionnaire_id_key" type="uq-constr" table="public.pdss1_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_pdss1_questionnaire" table="public.pdss1_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="rbdsq_scores" layers="0" collapse-mode="2" max-obj-count="16" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="620" y="4320"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="q1_vivid_dreams" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q2_aggressive_content" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q3_dream_enactment" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q4_limb_movements" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q5_injury_potential" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q6_bed_disruption" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q7_awakening_recall" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q8_sleep_disruption" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q9_neurological_disorder" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="q10_rem_behavior_problem" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="total_score" default-value="(((((( CASE     WHEN q1_vivid_dreams THEN 1     ELSE 0 END + CASE     WHEN q2_aggressive_content THEN 1     ELSE 0 END) + CASE     WHEN q3_dream_enactment THEN 1     ELSE 0 END) + CASE     WHEN q4_limb_movements THEN 1     ELSE 0 END) + CASE     WHEN q5_injury_potential THEN 1     ELSE 0 END) + CASE     WHEN q6_bed_disruption THEN 1     ELSE 0 END) + CASE     WHEN q7_awakening_recall THEN 1     ELSE 0 END) + CASE     WHEN q8_sleep_disruption THEN 1     ELSE 0 END" generated="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="rbdsq_scores_pkey" type="pk-constr" table="public.rbdsq_scores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rbdsq_scores_questionnaire_id_key" type="uq-constr" table="public.rbdsq_scores">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_rbdsq_questionnaire" table="public.rbdsq_scores"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<sequence name="active_task_definitions_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="active_task_definitions" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1080" y="4320"/>
+	<column name="id" not-null="true" sequence="public.active_task_definitions_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="task_code" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="task_name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="task_category">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="collection_form_type_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="stage">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="instructions">
+		<type name="text" length="0"/>
+	</column>
+	<column name="active" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="active_task_definitions_task_category_check" type="ck-constr" table="public.active_task_definitions">
+			<expression> <![CDATA[((task_category)::text = ANY ((ARRAY['MOTOR'::character varying, 'SPEECH'::character varying, 'GAIT'::character varying, 'OTHER'::character varying])::text[]))]]> </expression>
+	</constraint>
+	<constraint name="active_task_definitions_stage_check" type="ck-constr" table="public.active_task_definitions">
+			<expression> <![CDATA[((stage >= 1) AND (stage <= 3))]]> </expression>
+	</constraint>
+	<constraint name="active_task_definitions_pkey" type="pk-constr" table="public.active_task_definitions">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="active_task_definitions_task_code_key" type="uq-constr" table="public.active_task_definitions">
+		<columns names="task_code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_task_def_category" table="public.active_task_definitions"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="task_category"/>
+		</idxelement>
+</index>
+
+<index name="idx_task_def_stage" table="public.active_task_definitions"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="stage"/>
+		</idxelement>
+</index>
+
+<sequence name="task_checklist_items_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+</sequence>
+
+<table name="task_checklist_items" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1660" y="4320"/>
+	<column name="id" not-null="true" sequence="public.task_checklist_items_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="task_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="item_order" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="item_description" not-null="true">
+		<type name="character varying" length="500"/>
+	</column>
+	<constraint name="task_checklist_items_pkey" type="pk-constr" table="public.task_checklist_items">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="task_checklist_items_task_id_item_order_key" type="uq-constr" table="public.task_checklist_items">
+		<columns names="task_id,item_order" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="patient_task_collections" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="2180" y="4320"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="task_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="completion_percentage" default-value="0">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="completed_items" default-value="'[]'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="collected_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="collector_notes">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="patient_task_collections_completion_percentage_check" type="ck-constr" table="public.patient_task_collections">
+			<expression> <![CDATA[((completion_percentage >= (0)::numeric) AND (completion_percentage <= (100)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="patient_task_collections_pkey" type="pk-constr" table="public.patient_task_collections">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="patient_task_collections_questionnaire_id_task_id_key" type="uq-constr" table="public.patient_task_collections">
+		<columns names="questionnaire_id,task_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_patient_tasks_questionnaire" table="public.patient_task_collections"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_patient_tasks_task" table="public.patient_task_collections"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="task_id"/>
+		</idxelement>
+</index>
+
+<table name="binary_collections" layers="0" collapse-mode="2" max-obj-count="21" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<comment> <![CDATA[Binary CSV data from wearable sensors/collector app with patient CPF hash]]> </comment>
+	<position x="60" y="5380"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="patient_cpf_hash" not-null="true">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="repetitions_count" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="task_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="questionnaire_id">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="csv_data" not-null="true">
+		<type name="bytea" length="0"/>
+	</column>
+	<column name="file_size_bytes" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="file_checksum">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="collection_type">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="device_type">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="device_serial">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="sampling_rate_hz">
+		<type name="numeric" length="8" precision="2"/>
+	</column>
+	<column name="collected_at" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="uploaded_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="metadata" default-value="'{}'">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="processing_status" default-value="'pending'">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="processing_error">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_by">
+		<type name="uuid" length="0"/>
+	</column>
+	<constraint name="binary_collections_repetitions_count_check" type="ck-constr" table="public.binary_collections">
+			<expression> <![CDATA[(repetitions_count > 0)]]> </expression>
+	</constraint>
+	<constraint name="binary_collections_collection_type_check" type="ck-constr" table="public.binary_collections">
+			<expression> <![CDATA[((collection_type)::text = ANY ((ARRAY['MOTOR'::character varying, 'GAIT'::character varying, 'TREMOR'::character varying, 'SPEECH'::character varying, 'OTHER'::character varying])::text[]))]]> </expression>
+	</constraint>
+	<constraint name="binary_collections_processing_status_check" type="ck-constr" table="public.binary_collections">
+			<expression> <![CDATA[((processing_status)::text = ANY ((ARRAY['pending'::character varying, 'processing'::character varying, 'completed'::character varying, 'error'::character varying])::text[]))]]> </expression>
+	</constraint>
+	<constraint name="chk_collection_date" type="ck-constr" table="public.binary_collections">
+			<expression> <![CDATA[(collected_at <= CURRENT_TIMESTAMP)]]> </expression>
+	</constraint>
+	<constraint name="binary_collections_pkey" type="pk-constr" table="public.binary_collections">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_binary_cpf_hash" table="public.binary_collections"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="patient_cpf_hash"/>
+		</idxelement>
+</index>
+
+<index name="idx_binary_questionnaire" table="public.binary_collections"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_binary_task" table="public.binary_collections"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="task_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_binary_collected_at" table="public.binary_collections"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="collected_at"/>
+		</idxelement>
+</index>
+
+<index name="idx_binary_status" table="public.binary_collections"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="processing_status"/>
+		</idxelement>
+</index>
+
+<table name="processed_collection_features" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="560" y="5380"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="binary_collection_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="features" not-null="true">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="extraction_algorithm">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="algorithm_version">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="extracted_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="data_quality_score">
+		<type name="numeric" length="5" precision="4"/>
+	</column>
+	<column name="completeness_percentage">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="processed_collection_features_data_quality_score_check" type="ck-constr" table="public.processed_collection_features">
+			<expression> <![CDATA[((data_quality_score >= (0)::numeric) AND (data_quality_score <= (1)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="processed_collection_features_pkey" type="pk-constr" table="public.processed_collection_features">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="processed_collection_features_binary_collection_id_key" type="uq-constr" table="public.processed_collection_features">
+		<columns names="binary_collection_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_features_binary" table="public.processed_collection_features"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="binary_collection_id"/>
+		</idxelement>
+</index>
+
+<table name="pdf_reports" layers="0" collapse-mode="2" max-obj-count="13" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1160" y="5380"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="report_type" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="file_path">
+		<type name="character varying" length="500"/>
+	</column>
+	<column name="file_data">
+		<type name="bytea" length="0"/>
+	</column>
+	<column name="file_name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="file_size_bytes">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="mime_type" default-value="'application/pdf'">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="uploaded_by">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="uploaded_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="notes">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="pdf_reports_report_type_check" type="ck-constr" table="public.pdf_reports">
+			<expression> <![CDATA[((report_type)::text = ANY ((ARRAY['BIOBIT'::character varying, 'DELSYS'::character varying, 'POLYSOMNOGRAPHY'::character varying, 'OTHER'::character varying])::text[]))]]> </expression>
+	</constraint>
+	<constraint name="chk_file_storage" type="ck-constr" table="public.pdf_reports">
+			<expression> <![CDATA[(((file_path IS NOT NULL) AND (file_data IS NULL)) OR ((file_path IS NULL) AND (file_data IS NOT NULL)))]]> </expression>
+	</constraint>
+	<constraint name="pdf_reports_pkey" type="pk-constr" table="public.pdf_reports">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_pdf_questionnaire" table="public.pdf_reports"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_pdf_type" table="public.pdf_reports"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="report_type"/>
+		</idxelement>
+</index>
+
+<table name="clinical_impressions" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="1620" y="5380"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="questionnaire_id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="neurological_exam">
+		<type name="text" length="0"/>
+	</column>
+	<column name="resting_tremor_findings">
+		<type name="text" length="0"/>
+	</column>
+	<column name="postural_findings">
+		<type name="text" length="0"/>
+	</column>
+	<column name="levodopa_response">
+		<type name="text" length="0"/>
+	</column>
+	<column name="agonist_response">
+		<type name="text" length="0"/>
+	</column>
+	<column name="diagnostic_impression" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="recommended_conduct" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="additional_notes">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="clinical_impressions_pkey" type="pk-constr" table="public.clinical_impressions">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="clinical_impressions_questionnaire_id_key" type="uq-constr" table="public.clinical_impressions">
+		<columns names="questionnaire_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_clinical_impression_questionnaire" table="public.clinical_impressions"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="questionnaire_id"/>
+		</idxelement>
+</index>
+
+<table name="audit_log" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="2140" y="5380"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="table_name" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="record_id">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="operation" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="user_id">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="user_role">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="old_values">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="new_values">
+		<type name="jsonb" length="0"/>
+	</column>
+	<column name="performed_at" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="ip_address">
+		<type name="inet" length="0"/>
+	</column>
+	<column name="user_agent">
+		<type name="text" length="0"/>
+	</column>
+	<column name="notes">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="audit_log_operation_check" type="ck-constr" table="public.audit_log">
+			<expression> <![CDATA[((operation)::text = ANY ((ARRAY['INSERT'::character varying, 'UPDATE'::character varying, 'DELETE'::character varying, 'SELECT'::character varying])::text[]))]]> </expression>
+	</constraint>
+	<constraint name="audit_log_pkey" type="pk-constr" table="public.audit_log">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_audit_table" table="public.audit_log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="table_name"/>
+		</idxelement>
+</index>
+
+<index name="idx_audit_record" table="public.audit_log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="record_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_audit_user" table="public.audit_log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_audit_performed" table="public.audit_log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="performed_at"/>
+		</idxelement>
+</index>
+
+<view name="v_patient_summary" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="60" y="6260"/>
+	<reference>
+		<expression> <![CDATA[ SELECT p.id AS patient_id,
+    p.full_name,
+    p.date_of_birth,
+    EXTRACT(year FROM age((p.date_of_birth)::timestamp with time zone)) AS current_age,
+    g.description AS gender,
+    e.description AS ethnicity,
+    el.description AS education,
+    ms.description AS marital_status,
+    p.occupation,
+    count(DISTINCT q.id) AS total_assessments,
+    max(q.collection_date) AS last_assessment_date,
+    p.active,
+    p.created_at AS patient_since
+   FROM (((((patients p
+     LEFT JOIN gender_types g ON ((p.gender_id = g.id)))
+     LEFT JOIN ethnicity_types e ON ((p.ethnicity_id = e.id)))
+     LEFT JOIN education_levels el ON ((p.education_level_id = el.id)))
+     LEFT JOIN marital_status_types ms ON ((p.marital_status_id = ms.id)))
+     LEFT JOIN questionnaires q ON ((p.id = q.patient_id)))
+  GROUP BY p.id, g.description, e.description, el.description, ms.description;]]> </expression>
+	<column name="patient_id">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="full_name">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="date_of_birth">
+		<type name="date" length="0"/>
+	</column>
+	<column name="current_age">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="gender">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="ethnicity">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="education">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="marital_status">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="occupation">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="total_assessments">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="last_assessment_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="active">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="patient_since">
+		<type name="timestamp" length="0"/>
+	</column>
+		<reftable name="public.gender_types"/>
+		<reftable name="public.ethnicity_types"/>
+		<reftable name="public.education_levels"/>
+		<reftable name="public.marital_status_types"/>
+		<reftable name="public.patients"/>
+		<reftable name="public.questionnaires"/>
+	</reference>
+</view>
+
+<relationship name="rel_v_patient_summary_gender_types" type="reltv" layers="0"
+	 custom-color="#8ab26b"
+	 src-table="public.v_patient_summary"
+	 dst-table="public.gender_types"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_patient_summary_ethnicity_types" type="reltv" layers="0"
+	 custom-color="#0f501e"
+	 src-table="public.v_patient_summary"
+	 dst-table="public.ethnicity_types"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_patient_summary_education_levels" type="reltv" layers="0"
+	 custom-color="#db969a"
+	 src-table="public.v_patient_summary"
+	 dst-table="public.education_levels"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_patient_summary_marital_status_types" type="reltv" layers="0"
+	 custom-color="#22a32f"
+	 src-table="public.v_patient_summary"
+	 dst-table="public.marital_status_types"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_patient_summary_patients" type="reltv" layers="0"
+	 custom-color="#e464ad"
+	 src-table="public.v_patient_summary"
+	 dst-table="public.patients"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_patient_summary_questionnaires" type="reltv" layers="0"
+	 custom-color="#cdc9c9"
+	 src-table="public.v_patient_summary"
+	 dst-table="public.questionnaires"
+	 src-required="false" dst-required="false"/>
+
+<view name="v_questionnaire_summary" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="480" y="6260"/>
+	<reference>
+		<expression> <![CDATA[ SELECT q.id AS questionnaire_id,
+    q.patient_id,
+    p.full_name AS patient_name,
+    p.cpf_hash,
+    q.collection_date,
+    e.full_name AS evaluator_name,
+    q.status,
+    a.bmi,
+    ca.age_at_onset,
+    (EXTRACT(year FROM age((p.date_of_birth)::timestamp with time zone)) - (ca.age_at_onset)::numeric) AS disease_duration_years,
+    hy.stage AS hoehn_yahr_stage,
+    ca.schwab_england_score,
+    u3.total_score AS updrs3_score,
+    m.total_score AS meem_score,
+    ud.total_score AS udysrs_score,
+    fg.total_score AS fogq_score,
+    rb.total_score AS rbdsq_score,
+    sb.total_score AS stopbang_score,
+    ep.total_score AS epworth_score,
+    pd.total_score AS pdss1_score,
+    ( SELECT sum(pm.led_value) AS sum
+           FROM patient_medications pm
+          WHERE (pm.questionnaire_id = q.id)) AS total_ledd,
+    q.created_at,
+    q.completed_at
+   FROM (((((((((((((questionnaires q
+     JOIN patients p ON ((q.patient_id = p.id)))
+     LEFT JOIN evaluators e ON ((q.evaluator_id = e.id)))
+     LEFT JOIN anthropometric_data a ON ((q.id = a.questionnaire_id)))
+     LEFT JOIN clinical_assessments ca ON ((q.id = ca.questionnaire_id)))
+     LEFT JOIN hoehn_yahr_scale hy ON ((ca.hoehn_yahr_stage_id = hy.id)))
+     LEFT JOIN updrs_part3_scores u3 ON ((q.id = u3.questionnaire_id)))
+     LEFT JOIN meem_scores m ON ((q.id = m.questionnaire_id)))
+     LEFT JOIN udysrs_scores ud ON ((q.id = ud.questionnaire_id)))
+     LEFT JOIN fogq_scores fg ON ((q.id = fg.questionnaire_id)))
+     LEFT JOIN rbdsq_scores rb ON ((q.id = rb.questionnaire_id)))
+     LEFT JOIN stopbang_scores sb ON ((q.id = sb.questionnaire_id)))
+     LEFT JOIN epworth_scores ep ON ((q.id = ep.questionnaire_id)))
+     LEFT JOIN pdss1_scores pd ON ((q.id = pd.questionnaire_id)));]]> </expression>
+	<column name="questionnaire_id">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="patient_id">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="patient_name">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="cpf_hash">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="collection_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="evaluator_name">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="status">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="bmi">
+		<type name="numeric" length="5" precision="2"/>
+	</column>
+	<column name="age_at_onset">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="disease_duration_years">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="hoehn_yahr_stage">
+		<type name="numeric" length="2" precision="1"/>
+	</column>
+	<column name="schwab_england_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="updrs3_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="meem_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="udysrs_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fogq_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="rbdsq_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="stopbang_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="epworth_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="pdss1_score">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="total_ledd">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="created_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="completed_at">
+		<type name="timestamp" length="0"/>
+	</column>
+		<reftable name="public.hoehn_yahr_scale"/>
+		<reftable name="public.evaluators"/>
+		<reftable name="public.patients"/>
+		<reftable name="public.questionnaires"/>
+		<reftable name="public.anthropometric_data"/>
+		<reftable name="public.clinical_assessments"/>
+		<reftable name="public.patient_medications"/>
+		<reftable name="public.updrs_part3_scores"/>
+		<reftable name="public.meem_scores"/>
+		<reftable name="public.udysrs_scores"/>
+		<reftable name="public.fogq_scores"/>
+		<reftable name="public.stopbang_scores"/>
+		<reftable name="public.epworth_scores"/>
+		<reftable name="public.pdss1_scores"/>
+		<reftable name="public.rbdsq_scores"/>
+	</reference>
+</view>
+
+<relationship name="rel_v_questionnaire_summary_hoehn_yahr_scale" type="reltv" layers="0"
+	 custom-color="#103aa4"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.hoehn_yahr_scale"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_evaluators" type="reltv" layers="0"
+	 custom-color="#83633f"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.evaluators"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_patients" type="reltv" layers="0"
+	 custom-color="#ca6694"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.patients"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_questionnaires" type="reltv" layers="0"
+	 custom-color="#044bcc"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.questionnaires"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_anthropometric_data" type="reltv" layers="0"
+	 custom-color="#3f541c"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.anthropometric_data"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_clinical_assessments" type="reltv" layers="0"
+	 custom-color="#2bc356"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.clinical_assessments"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_patient_medications" type="reltv" layers="0"
+	 custom-color="#29c8bb"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.patient_medications"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_updrs_part3_scores" type="reltv" layers="0"
+	 custom-color="#d7058d"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.updrs_part3_scores"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_meem_scores" type="reltv" layers="0"
+	 custom-color="#20e400"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.meem_scores"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_udysrs_scores" type="reltv" layers="0"
+	 custom-color="#256db9"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.udysrs_scores"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_fogq_scores" type="reltv" layers="0"
+	 custom-color="#69f74f"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.fogq_scores"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_stopbang_scores" type="reltv" layers="0"
+	 custom-color="#353ea3"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.stopbang_scores"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_epworth_scores" type="reltv" layers="0"
+	 custom-color="#7f5de4"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.epworth_scores"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_pdss1_scores" type="reltv" layers="0"
+	 custom-color="#6eb8bb"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.pdss1_scores"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_questionnaire_summary_rbdsq_scores" type="reltv" layers="0"
+	 custom-color="#272c4a"
+	 src-table="public.v_questionnaire_summary"
+	 dst-table="public.rbdsq_scores"
+	 src-required="false" dst-required="false"/>
+
+<view name="v_binary_collections_summary" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<position x="920" y="6260"/>
+	<reference>
+		<expression> <![CDATA[ SELECT bc.id AS collection_id,
+    bc.patient_cpf_hash,
+    p.full_name AS patient_name,
+    bc.repetitions_count,
+    bc.collection_type,
+    bc.device_type,
+    bc.file_size_bytes,
+    bc.collected_at,
+    bc.processing_status,
+    td.task_name,
+    q.collection_date AS questionnaire_date,
+        CASE
+            WHEN (pcf.id IS NOT NULL) THEN true
+            ELSE false
+        END AS has_processed_features
+   FROM ((((binary_collections bc
+     LEFT JOIN patients p ON (((bc.patient_cpf_hash)::text = (p.cpf_hash)::text)))
+     LEFT JOIN active_task_definitions td ON ((bc.task_id = td.id)))
+     LEFT JOIN questionnaires q ON ((bc.questionnaire_id = q.id)))
+     LEFT JOIN processed_collection_features pcf ON ((bc.id = pcf.binary_collection_id)));]]> </expression>
+	<column name="collection_id">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="patient_cpf_hash">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="patient_name">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="repetitions_count">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="collection_type">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="device_type">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="file_size_bytes">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="collected_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="processing_status">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="task_name">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="questionnaire_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="has_processed_features">
+		<type name="boolean" length="0"/>
+	</column>
+		<reftable name="public.patients"/>
+		<reftable name="public.questionnaires"/>
+		<reftable name="public.active_task_definitions"/>
+		<reftable name="public.binary_collections"/>
+		<reftable name="public.processed_collection_features"/>
+	</reference>
+</view>
+
+<relationship name="rel_v_binary_collections_summary_patients" type="reltv" layers="0"
+	 custom-color="#6ccdac"
+	 src-table="public.v_binary_collections_summary"
+	 dst-table="public.patients"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_binary_collections_summary_questionnaires" type="reltv" layers="0"
+	 custom-color="#662e05"
+	 src-table="public.v_binary_collections_summary"
+	 dst-table="public.questionnaires"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_binary_collections_summary_active_task_definitions" type="reltv" layers="0"
+	 custom-color="#f38ce8"
+	 src-table="public.v_binary_collections_summary"
+	 dst-table="public.active_task_definitions"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_binary_collections_summary_binary_collections" type="reltv" layers="0"
+	 custom-color="#6c1cb3"
+	 src-table="public.v_binary_collections_summary"
+	 dst-table="public.binary_collections"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_v_binary_collections_summary_processed_collection_d41d8c" type="reltv" layers="0"
+	 custom-color="#740358"
+	 src-table="public.v_binary_collections_summary"
+	 dst-table="public.processed_collection_features"
+	 src-required="false" dst-required="false"/>
+
+<function name="update_updated_at_column"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="100"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition> <![CDATA[BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;]]> </definition>
+</function>
+
+<trigger name="update_patients_updated_at" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.patients">
+		<function signature="public.update_updated_at_column()"/>
+</trigger>
+
+<trigger name="update_evaluators_updated_at" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.evaluators">
+		<function signature="public.update_updated_at_column()"/>
+</trigger>
+
+<trigger name="update_questionnaires_updated_at" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.questionnaires">
+		<function signature="public.update_updated_at_column()"/>
+</trigger>
+
+<trigger name="update_clinical_assessments_updated_at" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.clinical_assessments">
+		<function signature="public.update_updated_at_column()"/>
+</trigger>
+
+<trigger name="update_clinical_impressions_updated_at" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.clinical_impressions">
+		<function signature="public.update_updated_at_column()"/>
+</trigger>
+
+<function name="audit_trigger_function"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="100"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="prime_admin"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition> <![CDATA[BEGIN
+    IF (TG_OP = 'DELETE') THEN
+        INSERT INTO audit_log (table_name, record_id, operation, old_values, performed_at)
+        VALUES (TG_TABLE_NAME, OLD.id, TG_OP, row_to_json(OLD), CURRENT_TIMESTAMP);
+        RETURN OLD;
+    ELSIF (TG_OP = 'UPDATE') THEN
+        INSERT INTO audit_log (table_name, record_id, operation, old_values, new_values, performed_at)
+        VALUES (TG_TABLE_NAME, NEW.id, TG_OP, row_to_json(OLD), row_to_json(NEW), CURRENT_TIMESTAMP);
+        RETURN NEW;
+    ELSIF (TG_OP = 'INSERT') THEN
+        INSERT INTO audit_log (table_name, record_id, operation, new_values, performed_at)
+        VALUES (TG_TABLE_NAME, NEW.id, TG_OP, row_to_json(NEW), CURRENT_TIMESTAMP);
+        RETURN NEW;
+    END IF;
+    RETURN NULL;
+END;]]> </definition>
+</function>
+
+<trigger name="audit_patients" firing-type="AFTER" per-line="true" constraint="false"
+	 ins-event="true" del-event="true" upd-event="true" trunc-event="false"
+	 table="public.patients">
+		<function signature="public.audit_trigger_function()"/>
+</trigger>
+
+<trigger name="audit_questionnaires" firing-type="AFTER" per-line="true" constraint="false"
+	 ins-event="true" del-event="true" upd-event="true" trunc-event="false"
+	 table="public.questionnaires">
+		<function signature="public.audit_trigger_function()"/>
+</trigger>
+
+<trigger name="audit_binary_collections" firing-type="AFTER" per-line="true" constraint="false"
+	 ins-event="true" del-event="true" upd-event="true" trunc-event="false"
+	 table="public.binary_collections">
+		<function signature="public.audit_trigger_function()"/>
+</trigger>
+
+<constraint name="patients_gender_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.gender_types" table="public.patients">
+	<columns names="gender_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="patients_ethnicity_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ethnicity_types" table="public.patients">
+	<columns names="ethnicity_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="patients_education_level_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.education_levels" table="public.patients">
+	<columns names="education_level_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="patients_marital_status_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.marital_status_types" table="public.patients">
+	<columns names="marital_status_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="patients_income_range_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.income_ranges" table="public.patients">
+	<columns names="income_range_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="questionnaires_patient_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.patients" table="public.questionnaires">
+	<columns names="patient_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="questionnaires_evaluator_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.evaluators" table="public.questionnaires">
+	<columns names="evaluator_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="anthropometric_data_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.anthropometric_data">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="clinical_assessments_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.clinical_assessments">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="clinical_assessments_phenotype_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.parkinson_phenotypes" table="public.clinical_assessments">
+	<columns names="phenotype_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="clinical_assessments_hoehn_yahr_stage_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.hoehn_yahr_scale" table="public.clinical_assessments">
+	<columns names="hoehn_yahr_stage_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="clinical_assessments_dyskinesia_type_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.dyskinesia_types" table="public.clinical_assessments">
+	<columns names="dyskinesia_type_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="clinical_assessments_surgery_type_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.surgery_types" table="public.clinical_assessments">
+	<columns names="surgery_type_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="patient_medications_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.patient_medications">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="patient_medications_medication_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.medications_reference" table="public.patient_medications">
+	<columns names="medication_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="updrs_part3_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.updrs_part3_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="meem_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.meem_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="udysrs_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.udysrs_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="nms_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.nms_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="nmf_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.nmf_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fogq_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.fogq_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="stopbang_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.stopbang_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="epworth_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.epworth_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="pdss1_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.pdss1_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="rbdsq_scores_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.rbdsq_scores">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="active_task_definitions_collection_form_type_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.collection_form_types" table="public.active_task_definitions">
+	<columns names="collection_form_type_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="task_checklist_items_task_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.active_task_definitions" table="public.task_checklist_items">
+	<columns names="task_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="patient_task_collections_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.patient_task_collections">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="patient_task_collections_task_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.active_task_definitions" table="public.patient_task_collections">
+	<columns names="task_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="binary_collections_task_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.active_task_definitions" table="public.binary_collections">
+	<columns names="task_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="binary_collections_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="SET NULL" ref-table="public.questionnaires" table="public.binary_collections">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="binary_collections_created_by_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.evaluators" table="public.binary_collections">
+	<columns names="created_by" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="processed_collection_features_binary_collection_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.binary_collections" table="public.processed_collection_features">
+	<columns names="binary_collection_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="pdf_reports_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.pdf_reports">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="pdf_reports_uploaded_by_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.evaluators" table="public.pdf_reports">
+	<columns names="uploaded_by" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="clinical_impressions_questionnaire_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.questionnaires" table="public.clinical_impressions">
+	<columns names="questionnaire_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="audit_log_user_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.evaluators" table="public.audit_log">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_patients_gender_types" type="relfk" layers="0"
+	 custom-color="#3321b7"
+	 src-table="public.patients"
+	 dst-table="public.gender_types" reference-fk="patients_gender_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_patients_ethnicity_types" type="relfk" layers="0"
+	 custom-color="#2b5a2b"
+	 src-table="public.patients"
+	 dst-table="public.ethnicity_types" reference-fk="patients_ethnicity_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_patients_education_levels" type="relfk" layers="0"
+	 custom-color="#f2fa25"
+	 src-table="public.patients"
+	 dst-table="public.education_levels" reference-fk="patients_education_level_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_patients_marital_status_types" type="relfk" layers="0"
+	 custom-color="#4d4841"
+	 src-table="public.patients"
+	 dst-table="public.marital_status_types" reference-fk="patients_marital_status_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_patients_income_ranges" type="relfk" layers="0"
+	 custom-color="#fa2a8f"
+	 src-table="public.patients"
+	 dst-table="public.income_ranges" reference-fk="patients_income_range_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_questionnaires_patients" type="relfk" layers="0"
+	 custom-color="#106617"
+	 src-table="public.questionnaires"
+	 dst-table="public.patients" reference-fk="questionnaires_patient_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_questionnaires_evaluators" type="relfk" layers="0"
+	 custom-color="#dbf319"
+	 src-table="public.questionnaires"
+	 dst-table="public.evaluators" reference-fk="questionnaires_evaluator_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_anthropometric_data_questionnaires" type="relfk" layers="0"
+	 custom-color="#625fb0"
+	 src-table="public.anthropometric_data"
+	 dst-table="public.questionnaires" reference-fk="anthropometric_data_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_clinical_assessments_questionnaires" type="relfk" layers="0"
+	 custom-color="#a74db8"
+	 src-table="public.clinical_assessments"
+	 dst-table="public.questionnaires" reference-fk="clinical_assessments_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_clinical_assessments_parkinson_phenotypes" type="relfk" layers="0"
+	 custom-color="#2e6d1f"
+	 src-table="public.clinical_assessments"
+	 dst-table="public.parkinson_phenotypes" reference-fk="clinical_assessments_phenotype_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_clinical_assessments_hoehn_yahr_scale" type="relfk" layers="0"
+	 custom-color="#67311b"
+	 src-table="public.clinical_assessments"
+	 dst-table="public.hoehn_yahr_scale" reference-fk="clinical_assessments_hoehn_yahr_stage_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_clinical_assessments_dyskinesia_types" type="relfk" layers="0"
+	 custom-color="#c09141"
+	 src-table="public.clinical_assessments"
+	 dst-table="public.dyskinesia_types" reference-fk="clinical_assessments_dyskinesia_type_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_clinical_assessments_surgery_types" type="relfk" layers="0"
+	 custom-color="#b3bc11"
+	 src-table="public.clinical_assessments"
+	 dst-table="public.surgery_types" reference-fk="clinical_assessments_surgery_type_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_patient_medications_questionnaires" type="relfk" layers="0"
+	 custom-color="#549eac"
+	 src-table="public.patient_medications"
+	 dst-table="public.questionnaires" reference-fk="patient_medications_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_patient_medications_medications_reference" type="relfk" layers="0"
+	 custom-color="#f9c6e3"
+	 src-table="public.patient_medications"
+	 dst-table="public.medications_reference" reference-fk="patient_medications_medication_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_updrs_part3_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#a22cdf"
+	 src-table="public.updrs_part3_scores"
+	 dst-table="public.questionnaires" reference-fk="updrs_part3_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_meem_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#5ad3df"
+	 src-table="public.meem_scores"
+	 dst-table="public.questionnaires" reference-fk="meem_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_udysrs_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#93e622"
+	 src-table="public.udysrs_scores"
+	 dst-table="public.questionnaires" reference-fk="udysrs_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_nms_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#f13c3c"
+	 src-table="public.nms_scores"
+	 dst-table="public.questionnaires" reference-fk="nms_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_nmf_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#fa24c0"
+	 src-table="public.nmf_scores"
+	 dst-table="public.questionnaires" reference-fk="nmf_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_fogq_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#d58b62"
+	 src-table="public.fogq_scores"
+	 dst-table="public.questionnaires" reference-fk="fogq_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_stopbang_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#165594"
+	 src-table="public.stopbang_scores"
+	 dst-table="public.questionnaires" reference-fk="stopbang_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_epworth_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#5a79ff"
+	 src-table="public.epworth_scores"
+	 dst-table="public.questionnaires" reference-fk="epworth_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_pdss1_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#7e76b7"
+	 src-table="public.pdss1_scores"
+	 dst-table="public.questionnaires" reference-fk="pdss1_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_rbdsq_scores_questionnaires" type="relfk" layers="0"
+	 custom-color="#3b5057"
+	 src-table="public.rbdsq_scores"
+	 dst-table="public.questionnaires" reference-fk="rbdsq_scores_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_active_task_definitions_collection_form_types" type="relfk" layers="0"
+	 custom-color="#d78266"
+	 src-table="public.active_task_definitions"
+	 dst-table="public.collection_form_types" reference-fk="active_task_definitions_collection_form_type_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_task_checklist_items_active_task_definitions" type="relfk" layers="0"
+	 custom-color="#15e19d"
+	 src-table="public.task_checklist_items"
+	 dst-table="public.active_task_definitions" reference-fk="task_checklist_items_task_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_patient_task_collections_questionnaires" type="relfk" layers="0"
+	 custom-color="#3694c3"
+	 src-table="public.patient_task_collections"
+	 dst-table="public.questionnaires" reference-fk="patient_task_collections_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_patient_task_collections_active_task_definitions" type="relfk" layers="0"
+	 custom-color="#125101"
+	 src-table="public.patient_task_collections"
+	 dst-table="public.active_task_definitions" reference-fk="patient_task_collections_task_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_binary_collections_active_task_definitions" type="relfk" layers="0"
+	 custom-color="#e50941"
+	 src-table="public.binary_collections"
+	 dst-table="public.active_task_definitions" reference-fk="binary_collections_task_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_binary_collections_questionnaires" type="relfk" layers="0"
+	 custom-color="#d9668e"
+	 src-table="public.binary_collections"
+	 dst-table="public.questionnaires" reference-fk="binary_collections_questionnaire_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_binary_collections_evaluators" type="relfk" layers="0"
+	 custom-color="#12b453"
+	 src-table="public.binary_collections"
+	 dst-table="public.evaluators" reference-fk="binary_collections_created_by_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_processed_collection_features_binary_collections" type="relfk" layers="0"
+	 custom-color="#7bb25b"
+	 src-table="public.processed_collection_features"
+	 dst-table="public.binary_collections" reference-fk="processed_collection_features_binary_collection_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_pdf_reports_questionnaires" type="relfk" layers="0"
+	 custom-color="#77b09d"
+	 src-table="public.pdf_reports"
+	 dst-table="public.questionnaires" reference-fk="pdf_reports_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_pdf_reports_evaluators" type="relfk" layers="0"
+	 custom-color="#230e38"
+	 src-table="public.pdf_reports"
+	 dst-table="public.evaluators" reference-fk="pdf_reports_uploaded_by_fkey"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_clinical_impressions_questionnaires" type="relfk" layers="0"
+	 custom-color="#4c18b5"
+	 src-table="public.clinical_impressions"
+	 dst-table="public.questionnaires" reference-fk="clinical_impressions_questionnaire_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_audit_log_evaluators" type="relfk" layers="0"
+	 custom-color="#37c473"
+	 src-table="public.audit_log"
+	 dst-table="public.evaluators" reference-fk="audit_log_user_id_fkey"
+	 src-required="false" dst-required="false"/>
+
+<permission>
+	<object name="public" type="schema"/>
+	<roles names="pg_database_owner"/>
+	<privileges create="true" usage="true"/>
+</permission>
+<permission>
+	<object name="public" type="schema"/>
+	<privileges usage="true"/>
+</permission>
+</dbmodel>
