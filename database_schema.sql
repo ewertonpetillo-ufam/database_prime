@@ -386,6 +386,8 @@ CREATE TABLE clinical_assessments (
     -- Clinical notes
     comorbidities TEXT,
     other_medications TEXT,
+    medication_allergies TEXT,
+    food_allergies TEXT,
     disease_evolution TEXT,
     current_symptoms TEXT,
 

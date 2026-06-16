@@ -760,6 +760,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="other_medications">
 		<type name="text" length="0"/>
 	</column>
+	<column name="medication_allergies">
+		<type name="text" length="0"/>
+	</column>
+	<column name="food_allergies">
+		<type name="text" length="0"/>
+	</column>
 	<column name="disease_evolution">
 		<type name="text" length="0"/>
 	</column>
