@@ -1294,7 +1294,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Audit trail: versão completa para demais tabelas (questionnaires, binary_collections)
+-- Audit trail: versão completa para questionnaires (sem BYTEA).
+-- binary_collections NÃO usa esta função: row_to_json serializaria csv_data e
+-- causaria OOM no Postgres (confirmRunDelivery / UPDATEs de sync).
 CREATE OR REPLACE FUNCTION audit_trigger_function()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -1315,7 +1317,48 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Apply audit triggers (patients: minimal; demais: full)
+-- Anula csv_data no record ANTES de to_jsonb para não detoastar nem hex-encodar o BYTEA.
+CREATE OR REPLACE FUNCTION audit_binary_collection_row_to_jsonb(rec binary_collections)
+RETURNS jsonb
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  rec.csv_data := NULL;
+  RETURN (to_jsonb(rec) - 'csv_data')
+      || jsonb_build_object('csv_data_omitted', true);
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION audit_binary_collections_trigger()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  IF (TG_OP = 'DELETE') THEN
+    INSERT INTO audit_log (table_name, record_id, operation, old_values, performed_at)
+    VALUES (TG_TABLE_NAME, OLD.id, TG_OP, audit_binary_collection_row_to_jsonb(OLD), CURRENT_TIMESTAMP);
+    RETURN OLD;
+  ELSIF (TG_OP = 'UPDATE') THEN
+    INSERT INTO audit_log (table_name, record_id, operation, old_values, new_values, performed_at)
+    VALUES (
+      TG_TABLE_NAME,
+      NEW.id,
+      TG_OP,
+      audit_binary_collection_row_to_jsonb(OLD),
+      audit_binary_collection_row_to_jsonb(NEW),
+      CURRENT_TIMESTAMP
+    );
+    RETURN NEW;
+  ELSIF (TG_OP = 'INSERT') THEN
+    INSERT INTO audit_log (table_name, record_id, operation, new_values, performed_at)
+    VALUES (TG_TABLE_NAME, NEW.id, TG_OP, audit_binary_collection_row_to_jsonb(NEW), CURRENT_TIMESTAMP);
+    RETURN NEW;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+-- Apply audit triggers (patients: minimal; questionnaires: full; binary_collections: sem csv_data)
 CREATE TRIGGER audit_patients AFTER INSERT OR UPDATE OR DELETE ON patients
     FOR EACH ROW EXECUTE FUNCTION audit_trigger_function_minimal();
 
@@ -1323,7 +1366,7 @@ CREATE TRIGGER audit_questionnaires AFTER INSERT OR UPDATE OR DELETE ON question
     FOR EACH ROW EXECUTE FUNCTION audit_trigger_function();
 
 CREATE TRIGGER audit_binary_collections AFTER INSERT OR UPDATE OR DELETE ON binary_collections
-    FOR EACH ROW EXECUTE FUNCTION audit_trigger_function();
+    FOR EACH ROW EXECUTE FUNCTION audit_binary_collections_trigger();
 
 -- ============================================================================
 -- EXAMPLE QUERIES
