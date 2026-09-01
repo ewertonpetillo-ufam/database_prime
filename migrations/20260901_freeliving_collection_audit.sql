@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS freeliving_collection_events (
   patient_id UUID NOT NULL REFERENCES patients(id),
   patient_cpf_hash VARCHAR(128) NOT NULL,
   action_code VARCHAR(64) NOT NULL REFERENCES freeliving_action_types(code),
+  task_code VARCHAR(20) NULL,
   occurred_at TIMESTAMPTZ NOT NULL,
   received_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   collection_date DATE NOT NULL,
@@ -40,6 +41,9 @@ CREATE INDEX IF NOT EXISTS idx_freeliving_events_patient_date
 
 CREATE INDEX IF NOT EXISTS idx_freeliving_events_action_date
   ON freeliving_collection_events (action_code, collection_date);
+
+CREATE INDEX IF NOT EXISTS idx_freeliving_events_task_date
+  ON freeliving_collection_events (task_code, collection_date);
 
 CREATE INDEX IF NOT EXISTS idx_freeliving_events_cpf_hash
   ON freeliving_collection_events (patient_cpf_hash);
