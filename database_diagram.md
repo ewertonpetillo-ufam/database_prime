@@ -408,26 +408,25 @@ erDiagram
         timestamp created_at
     }
 
-    pdss1_scores {
+    pdss2_scores {
         uuid id PK
         uuid questionnaire_id FK UK
-        smallint q1_sleep_quality
-        smallint q2_difficulty_falling_asleep
-        smallint q3_difficulty_staying_asleep
-        smallint q4_restlessness
-        smallint q5_distressing_dreams
-        smallint q6_distressing_hallucinations
-        smallint q7_nocturia
-        smallint q8_difficulty_turning
-        smallint q9_painful_posturing
-        smallint q10_tremor_waking
-        smallint q11_tired_waking
-        smallint q12_refreshed_waking
-        smallint q13_daytime_dozing
-        smallint q14_unexpected_dozing
-        smallint q15_total_sleep_hours
-        integer total_score "GENERATED (0-150)"
-        decimal average_score "GENERATED (0-10)"
+        smallint q1
+        smallint q2
+        smallint q3
+        smallint q4
+        smallint q5
+        smallint q6
+        smallint q7
+        smallint q8
+        smallint q9
+        smallint q10
+        smallint q11
+        smallint q12
+        smallint q13
+        smallint q14
+        smallint q15
+        integer total_score "GENERATED (0-60)"
         timestamp created_at
     }
 
@@ -600,7 +599,7 @@ erDiagram
     questionnaires ||--|| fogq_scores : "has"
     questionnaires ||--|| stopbang_scores : "has"
     questionnaires ||--|| epworth_scores : "has"
-    questionnaires ||--|| pdss1_scores : "has"
+    questionnaires ||--|| pdss2_scores : "has"
     questionnaires ||--|| rbdsq_scores : "has"
     questionnaires ||--o{ patient_task_collections : "includes"
     questionnaires ||--o{ pdf_reports : "has"
