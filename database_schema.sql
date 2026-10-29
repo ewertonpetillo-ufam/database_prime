@@ -294,6 +294,9 @@ CREATE TABLE questionnaires (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     patient_id UUID NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
     evaluator_id UUID NOT NULL REFERENCES users(id),
+    speech_evaluator_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    sleep_evaluator_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    physio_evaluator_id UUID REFERENCES users(id) ON DELETE SET NULL,
 
     -- Assessment metadata
     collection_date DATE NOT NULL,
@@ -310,8 +313,16 @@ CREATE TABLE questionnaires (
 
 CREATE INDEX idx_questionnaires_patient ON questionnaires(patient_id);
 CREATE INDEX idx_questionnaires_evaluator ON questionnaires(evaluator_id);
+CREATE INDEX idx_questionnaires_speech_evaluator ON questionnaires(speech_evaluator_id);
+CREATE INDEX idx_questionnaires_sleep_evaluator ON questionnaires(sleep_evaluator_id);
+CREATE INDEX idx_questionnaires_physio_evaluator ON questionnaires(physio_evaluator_id);
 CREATE INDEX idx_questionnaires_status ON questionnaires(status);
 CREATE INDEX idx_questionnaires_date ON questionnaires(collection_date);
+
+COMMENT ON COLUMN questionnaires.evaluator_id IS 'Médico que criou o questionário (avaliador dos passos 1 a 4)';
+COMMENT ON COLUMN questionnaires.speech_evaluator_id IS 'Avaliador da fala (passo 5)';
+COMMENT ON COLUMN questionnaires.sleep_evaluator_id IS 'Avaliador do sono (passo 6)';
+COMMENT ON COLUMN questionnaires.physio_evaluator_id IS 'Avaliador da fisioterapia (passo 7)';
 
 -- ============================================================================
 -- CLINICAL DATA TABLES
@@ -1137,11 +1148,17 @@ SELECT
     (SELECT SUM(led_value) FROM patient_medications pm WHERE pm.questionnaire_id = q.id) AS total_ledd,
 
     q.created_at,
-    q.completed_at
+    q.completed_at,
+    e_speech.full_name AS speech_evaluator_name,
+    e_sleep.full_name AS sleep_evaluator_name,
+    e_physio.full_name AS physio_evaluator_name
 
 FROM questionnaires q
 JOIN patients p ON q.patient_id = p.id
 LEFT JOIN users e ON q.evaluator_id = e.id
+LEFT JOIN users e_speech ON q.speech_evaluator_id = e_speech.id
+LEFT JOIN users e_sleep ON q.sleep_evaluator_id = e_sleep.id
+LEFT JOIN users e_physio ON q.physio_evaluator_id = e_physio.id
 LEFT JOIN anthropometric_data a ON q.id = a.questionnaire_id
 LEFT JOIN clinical_assessments ca ON q.id = ca.questionnaire_id
 LEFT JOIN hoehn_yahr_scale hy ON ca.hoehn_yahr_stage_id = hy.id
