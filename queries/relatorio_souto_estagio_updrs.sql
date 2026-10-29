@@ -17,8 +17,8 @@
 -- H&Y e UPDRS III vêm dessa coleta. UPDRS III é o total calculado da parte 3.
 -- Sem registro de UPDRS, a coluna fica vazia.
 --
--- estado_ON_OFF: estado medicamentoso com levodopa no momento da avaliação
---   (clinical_assessments.assessed_on_levodopa). Sem avaliação clínica, fica vazio.
+-- estado_ON_OFF: Medicado + ON/OFF, ou "Não medicado / Drug naive".
+--   Sem avaliação clínica, fica vazio.
 --
 -- uso_medicação_Parkinson: Sim se a coleta tem ao menos um medicamento
 --   da lista de antiparkinsonianos (patient_medications). Não, caso contrário.
@@ -50,7 +50,8 @@ SELECT
     hy.stage AS "H&Y",
     u.total_score AS "UPDRS_III_total",
     CASE
-        WHEN ca.id IS NULL THEN NULL
+        WHEN ca.id IS NULL OR ca.medicated IS NULL THEN NULL
+        WHEN ca.medicated IS FALSE THEN 'Não medicado / Drug naive'
         WHEN ca.assessed_on_levodopa IS TRUE THEN 'ON'
         ELSE 'OFF'
     END AS estado_ON_OFF,

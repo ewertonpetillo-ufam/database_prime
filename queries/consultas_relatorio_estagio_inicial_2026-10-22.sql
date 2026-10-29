@@ -77,7 +77,8 @@ base AS (
         hy.stage::numeric AS hy,
         u.total_score AS updrs,
         CASE
-            WHEN ca.id IS NULL THEN NULL
+            WHEN ca.id IS NULL OR ca.medicated IS NULL THEN NULL
+            WHEN ca.medicated IS FALSE THEN 'Não medicado / Drug naive'
             WHEN ca.assessed_on_levodopa IS TRUE THEN 'ON'
             ELSE 'OFF'
         END AS estado_on_off,

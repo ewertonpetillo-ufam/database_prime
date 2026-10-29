@@ -391,7 +391,10 @@ CREATE TABLE clinical_assessments (
     ldopa_onset_time_hours DECIMAL(4,2),
 
     -- Medication status at assessment
-    assessed_on_levodopa BOOLEAN DEFAULT FALSE,
+    -- true = medicado; false = não medicado / drug-naive; null = não informado
+    medicated BOOLEAN,
+    -- true = ON, false = OFF, null = não se aplica
+    assessed_on_levodopa BOOLEAN,
 
     -- Surgery history
     has_surgery_history BOOLEAN DEFAULT FALSE,
